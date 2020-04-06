@@ -1,18 +1,13 @@
 def exponentiation(x, n):
-    if n == 0:
-        return 1
-    elif n == 1:
+    if n == 1:
         return x
+    elif n % 2 == 0:
+        return exponentiation(x**2, n/2)
     else:
-        tmp = exponentiation(x, n/2)
-        if n %2 == 0:
-            return tmp * tmp
-        else:
-            return x * tmp * tmp
+        return x * exponentiation(x**2, (n-1)/2)
+
 
 x = float(input('Nombre entier ou réel : '))
-n = int(input('Nombre entier positif : '))
+n = int(input('Puissance : '))
 
 print(exponentiation(x, n))
-
-
