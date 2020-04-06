@@ -10,7 +10,7 @@ def exponentiation(x, n):
         else:
             return x * tmp * tmp
 
-x = int(input('Nombre entier ou réel : '))
+x = float(input('Nombre entier ou réel : '))
 n = int(input('Nombre entier positif : '))
 
 print(exponentiation(x, n))
