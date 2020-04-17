@@ -2,7 +2,7 @@ import numpy
 import random
 from matplotlib import pyplot
 
-N_STEPS = 20
+N_STEPS = 1000
 prob = 0.5
 
 def RandomWalk(N,p,line):
@@ -21,5 +21,7 @@ def RandomWalk(N,p,line):
     return None
 
 pyplot.figure()
+pyplot.xlabel('Steps taken')
+pyplot.ylabel('Distance from Starting Position')
 RandomWalk(N_STEPS, prob, line = 'o--')
 pyplot.show()
