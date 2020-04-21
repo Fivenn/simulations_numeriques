@@ -3,8 +3,8 @@ def chiffre(n, c, msg):
 	msgAsci = [str(ord(j)) for j in msg]
 	# Ajout des zéros, pour avoir une longueur fixe (3) de chaque code msgAscicii
 	for i, k in enumerate(msgAsci):
-		if len(k) < 3:		
-			while len(k) < 3:
+		if len(k) < 4:		
+			while len(k) < 4:
 				k = '0' + k
 			msgAsci[i] = k
 
@@ -37,14 +37,27 @@ def dechiffre(n, d, msgChiffre):
 	for i in msgChiffre:
 		resultat.append(str(((int(i)**d)%n)))
 
-	print(resultat)
 	# il faut retransformer les blocs en code ascii
-	return ""
+	for i, s in enumerate(resultat):
+		if len(s) < 4:
+			while len(s) < 4:
+				s = '0' + s
+			resultat[i] = s
+
+	#on refait des groupes de 3 et on les convertie directement en ascii
+	g = ''.join(resultat)
+	asci = ''
+	d , f = 0 , 4
+	while f <= len(g):
+		asci = asci + chr(int(g[d:f])) #conversion ascii
+		d , f = f , f + 4
+	
+	return asci 
 
 def main():
 	# p et q les deux nombres premier distincts
-	p = 3
-	q = 11
+	p = 61
+	q = 53
 
 	# le module de chiffrement n = p*q
 	n = p * q
@@ -53,16 +66,19 @@ def main():
 	# indicatriceEuler = (p - 1)*(q - 1)
 
 	# Exposant de chiffrement premier avec l'indicatrice d'euler
-	e = 3
+	e = 17
 
-	# Exposant de dechiffrement, l'inverse de l'inverse de e % indicatriceEuler 
-	d = 7 
+	# Exposant de dechiffrement, l'inverse de e % indicatriceEuler 
+	d = 413
 
 	# le messsage à chiffre
 	msg = "message"
 
 	msgChiffre = chiffre(n, e, msg)
-	print(msgChiffre)
+	print("Message à chiffrer :")
+	print(msg)
+
+	print("Message dechiffré :")
 	print(dechiffre(n, d, msgChiffre))
 
 if __name__ == "__main__":
